@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+const generateIndex = require('./generateIndex')
 
 class Employee {
     constructor(name, id, email){
@@ -15,7 +17,9 @@ class Manager extends Employee{
     constructor(name, id, email, officeNumber){
         super(name, id, email);
         this.officeNumber = officeNumber;
-        this.getRole = () => {}
+        this.getRole = () => {
+            return answer.role
+        }
     }
 }
 
@@ -36,6 +40,8 @@ class Intern extends Employee{
         this.getRole = () => {}
     }
 }
+
+const allUser = []
 
 const promptUser = () => {
 inquirer
@@ -94,28 +100,24 @@ inquirer
         name: 'school',
         when: (answers) => answers.role === 'Intern',
     },
-    {   
-        type: 'list',
-        message: "Would you like to add another employee?",
-        name: 'restart',
-        choices: ['Yes', 'No']
+    {
+    type: 'confirm',
+    message: "Would you like to add another employee?",
+    name: 'restart',
     },
-])
-
-.then((answers) => { 
-    const allUser = []
-    if(answers.restart === 'Yes'){
-        allUser.push(newUser);
-        promptUser()} 
-    if(answers.restart === 'No'){
-        console.log(`Here's the added employees:`)
-        console.log(answers.role);
-    };
-    if(answers.role === 'Manager'){
-        const manager = new Manager(this.name, this.email, this.id, this.officeNumber)
-        console.log(manager)
+]).then(answers => {
+    allUser.push(answers)
+    if (answers.restart === true){
+        promptUser()
+    } else {
+        console.log(allUser);
+        const employeeList = generateIndex(allUser)
+        
+        fs.writeFile('./index.html', employeeList, function(err) {
+            return err ? console.error(err) : console.log('Success!')
+        })
     }
-});
-}
+})
+};
 
 promptUser()
