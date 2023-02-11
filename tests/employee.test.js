@@ -1,5 +1,3 @@
-const jest = require('jest');
-
 class Employee {
     constructor(name, id, email){
         this.name = name;
@@ -8,8 +6,13 @@ class Employee {
         }
     };
 
-describe('Employee', () => {
-    it('Should be able to output a JSON with name, id, and email');
-    const employee = new Employee('John', '1', 'test@test.org');
-    expect(employee.name).toEqual('John')
-});
+    describe('Employee', () => {
+        it('should create an Employee object with the correct properties', () => {
+            const employee = new Employee('John Doe', 1, 'johndoe@email.com');
+            expect(employee.name).toEqual('John Doe');
+            expect(employee.id).toEqual(1);
+            expect(employee.email).toEqual('johndoe@email.com');
+        });
+    });
+    
+

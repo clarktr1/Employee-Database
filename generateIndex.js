@@ -1,4 +1,4 @@
-const indexjs = ('./index.js')
+
 
 
 function generateIndex(data) {
@@ -17,7 +17,7 @@ function generateIndex(data) {
             </div>
             <div class="employee-info">
             <p>ID: ${data[i].id}</p>
-            <p>Email: ${data[i].email}</p>
+            <p>Email: <a href="mailto:${data[i].email}">${data[i].email}</a>
             ${officeNumber !== undefined ? `<p>Office Number: ${officeNumber}</p>` : ""}
             ${school !== undefined ? `<p>School: ${school}</p>` : ""}
             ${github !== undefined ? `<p>Github: <p><a href="https://github.com/${github}">${github}</a></p>` : ""}
