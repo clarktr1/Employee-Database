@@ -1,0 +1,74 @@
+*{
+    font-family: 'Kumbh Sans';
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.header-bar {
+    width: 100vw;
+    height: 13vh;
+    background-color: rgba(236, 63, 63, 0.813);
+}
+
+.employee-container {
+    width: 70vw;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.employee-card{
+    height: 40%;
+    width: 20%;
+    background-color: #fff;
+    border: 1px solid rgba(71, 69, 69, 0.63);
+    border-radius: 16px;
+}
+
+.employee-card:hover {
+    width: 21%;
+    height: 42%;
+    box-shadow: 5px 8px #797777a7;
+    cursor: pointer;
+}
+
+.employee-info {
+    padding-left: 3%;
+}
+
+.title-container{
+    color: #fff;
+    height: auto;
+    text-align: center;
+    background-color: rgba(236, 63, 63, 0.813);
+    border-bottom: 1px solid rgba(97, 94, 94, 0.539);
+    padding-top: 1px;
+    border-radius: 16px 16px 0 0;
+}
+
+.title{
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.role{
+    font-size: 1.3rem;
+    margin: 0;
+    padding-bottom: 3%;
+}

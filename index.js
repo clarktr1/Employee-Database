@@ -113,7 +113,7 @@ inquirer
         console.log(allUser);
         const employeeList = generateIndex(allUser)
         
-        fs.writeFile('./index.html', employeeList, function(err) {
+        fs.writeFile('./public/index.html', employeeList, function(err) {
             return err ? console.error(err) : console.log('Success!')
         })
     }
