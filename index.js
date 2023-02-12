@@ -41,6 +41,10 @@ class Intern extends Employee{
     }
 }
 
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 const allUser = []
 
 const promptUser = () => {
@@ -53,6 +57,8 @@ inquirer
         validate: (input) => {
             if (!input) {
               return 'Name is required';
+            } else if (!/^[a-z A-Z]+$/.test(input)) {
+                return 'Name should only container letters';
             } return true
         }
     },
@@ -63,6 +69,8 @@ inquirer
         validate: (input) => {
             if (!input) {
               return 'ID is required';
+            } else if (!/^\d+$/.test(input)) {
+                return 'ID should be a number';
             } return true
         }
     },
@@ -72,8 +80,10 @@ inquirer
         name: 'email',
         validate: (input) => {
             if (!input) {
-              return 'Email is required';
-            } return true
+                return 'Email is required';
+            } else if(!validateEmail(input)){
+                return 'This is not a valid email'
+            }   return true
         }
     },
     {   
@@ -87,18 +97,35 @@ inquirer
         message: "What is the employee's office number?",
         name: 'officeNumber',
         when: (answers) => answers.role === 'Manager',
+        validate: (input) => {
+            if (!input) {
+                return 'Office Number is required';
+              } else if (!/^\d+$/.test(input)) {
+                  return 'Office Number should be only numbers';
+              } return true
+        }
     },
     {   
         type: 'input',
         message: "What is the employee's github?",
         name: 'github',
         when: (answers) => answers.role === 'Engineer',
+        validate: (input) => {
+            if (!input) {
+              return 'Github username is required';
+            } return true
+        }
     },
     {   
         type: 'input',
         message: "What is the employee's school?",
         name: 'school',
         when: (answers) => answers.role === 'Intern',
+        validate: (input) => {
+            if (!input) {
+              return 'School name is required';
+            } return true
+        }
     },
     {
     type: 'confirm',
@@ -119,5 +146,6 @@ inquirer
     }
 })
 };
+
 
 promptUser()
