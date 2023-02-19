@@ -14,31 +14,27 @@ class Employee {
 };
 
 class Manager extends Employee{
-    constructor(name, id, email, officeNumber){
+    constructor(name, id, email, officeNumber, role){
         super(name, id, email);
         this.officeNumber = officeNumber;
-        this.getRole = () => {
-            return answer.role
-        }
+        this.role = role;
     }
 }
 
 class Engineer extends Employee{
-    constructor(name, id, email, github){
+    constructor(name, id, email, github, role){
         super(name, id, email);
         this.github = github;
-        this.getGitHub = () => {}
-        this.getRole = () => {}
+        this.role = role;
     }
 }
 
 class Intern extends Employee{
-    constructor(name, id, email, school){
+    constructor(name, id, email, school, role){
         super(name, id, email);
         this.school = school;
-        this.getSchool = () => {}
-        this.getRole = () => {}
-    }
+        this.role = role;
+}
 }
 
 function validateEmail(email) {
@@ -53,7 +49,7 @@ inquirer
     {   
         type: 'input',
         message: "What is the employee's name?",
-        name: 'user',
+        name: 'name',
         validate: (input) => {
             if (!input) {
               return 'Name is required';
@@ -133,7 +129,37 @@ inquirer
     name: 'restart',
     },
 ]).then(answers => {
-    allUser.push(answers)
+    let employee;
+    if (answers.role === 'Manager'){
+        employee = new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.officeNumber,
+            answers.role,
+        )
+    };
+    if (answers.role === 'Engineer'){
+        employee = new Engineer(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.github,
+            answers.role,
+        )
+    };
+    if (answers.role === 'Intern'){
+        employee = new Intern(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.school,
+            answers.role,
+        )
+    };
+
+
+    allUser.push(employee)
     if (answers.restart === true){
         promptUser()
     } else {
